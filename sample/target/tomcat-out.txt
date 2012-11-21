@@ -1,0 +1,9 @@
+
+Configuring Spring Security UI ...
+... finished configuring Spring Security UI
+
+
+Configuring Spring Security Core ...
+... finished configuring Spring Security Core
+
+Server running. Browse to http://localhost:8080/sample
