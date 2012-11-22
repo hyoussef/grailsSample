@@ -1,6 +1,7 @@
 package com.sample
 
 import org.apache.commons.lang.builder.HashCodeBuilder
+import org.codehaus.groovy.grails.plugins.springsecurity.acl.AclSid;
 
 class UserRole implements Serializable {
 
@@ -29,9 +30,16 @@ class UserRole implements Serializable {
 	}
 
 	static UserRole create(User user, Role role, boolean flush = false) {
+//		AclSid sid = new AclSid()
+//		sid.setSid(user.username)
+//		sid.setPrincipal(true);
+//		sid.save(flush: flush, insert: true)
 		new UserRole(user: user, role: role).save(flush: flush, insert: true)
+
 	}
 
+	
+	
 	static boolean remove(User user, Role role, boolean flush = false) {
 		UserRole instance = UserRole.findByUserAndRole(user, role)
 		if (!instance) {
