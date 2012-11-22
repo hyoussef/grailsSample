@@ -28,7 +28,7 @@ class User {
 
 	def beforeInsert() {
 		encodePassword()
-		addSid()
+		ManageAclSid.addSid(username , true)
 	}
 
 	def beforeUpdate() {
@@ -40,7 +40,7 @@ class User {
 			def currentName = usr.username
 			def originalName = usr.getPersistentValue('username')
 			if (currentName != originalName) {
-				updateSid(originalName);
+				ManageAclSid.updateSid(currentName , originalName , true);
 			}
 		}
 	}
@@ -50,19 +50,7 @@ class User {
 		password = springSecurityService.encodePassword(password)
 	}
 	
-	protected AclSid addSid(){
-		AclSid sid = new AclSid()
-		sid.setSid(username)
-		sid.setPrincipal(true);
-		sid.save(insert: true)		
-	}
-	
-	protected AclSid updateSid( String originalSid){
-		AclSid sid = AclSid.find {sid == originalSid}
-		sid.setSid(username)
-		sid.setPrincipal(true);
-		sid.save()
-	}
+
 
 
 }
